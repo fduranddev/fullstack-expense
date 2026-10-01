@@ -1,0 +1,44 @@
+### ============================================================
+### Tests de l'API des transactions (extension REST Client)
+### Serveur : python3 manage.py runserver
+### ============================================================
+
+### 1. CRÉER une transaction
+# POST sur la collection : le serveur génère l'id (UUID) et created_at.
+# Copiez l'id renvoyé dans la réponse pour tester les requêtes suivantes.
+POST http://localhost:8000/api/transactions/
+Content-Type: application/json
+
+{
+  "text": "Salaire Juin",
+  "amount": -2000.00
+}
+
+### 2. LISTER toutes les transactions
+# GET sur la collection : renvoie un tableau JSON.
+GET http://localhost:8000/api/transactions/
+
+### 3. SUPPRIMER une transaction
+# DELETE sur une transaction précise (UUID dans l'URL).
+# Réponse attendue : 204 No Content. Un second appel donnera 404.
+DELETE http://localhost:8000/api/transactions/7fe3245a-4b8d-4633-89cb-cea8715416c4/
+
+### 4. MODIFIER une transaction (remplacement COMPLET)
+# PUT exige tous les champs modifiables (text et amount),
+# sinon DRF répond 400.
+PUT http://localhost:8000/api/transactions/46e9110c-3590-473d-8492-2ffa6650ce36/
+Content-Type: application/json
+
+{
+  "text": "Salaire février",
+  "amount": 10000.00
+}
+
+### 5. MODIFIER une transaction (mise à jour PARTIELLE)
+# PATCH n'envoie que les champs à changer (ici uniquement amount).
+PATCH http://localhost:8000/api/transactions/46e9110c-3590-473d-8492-2ffa6650ce36/
+Content-Type: application/json
+
+{
+  "amount": 60000.00
+}

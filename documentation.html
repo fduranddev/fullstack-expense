@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>Comment cr&eacute;er une application fullstack avec Django &lpar;backend&rpar; et React &lpar;frontend&rpar;</title>
+            <style>
+/* From extension vscode.github */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.vscode-dark img[src$=\#gh-light-mode-only],
+.vscode-light img[src$=\#gh-dark-mode-only],
+.vscode-high-contrast:not(.vscode-high-contrast-light) img[src$=\#gh-light-mode-only],
+.vscode-high-contrast-light img[src$=\#gh-dark-mode-only] {
+	display: none;
+}
+
+</style>
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.css">
+<link href="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item {
+    list-style-type: none;
+}
+
+.task-list-item-checkbox {
+    margin-left: -20px;
+    vertical-align: middle;
+    pointer-events: none;
+}
+</style>
+<style>
+:root {
+  --color-note: #0969da;
+  --color-tip: #1a7f37;
+  --color-warning: #9a6700;
+  --color-severe: #bc4c00;
+  --color-caution: #d1242f;
+  --color-important: #8250df;
+}
+
+</style>
+<style>
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-note: #2f81f7;
+    --color-tip: #3fb950;
+    --color-warning: #d29922;
+    --color-severe: #db6d28;
+    --color-caution: #f85149;
+    --color-important: #a371f7;
+  }
+}
+
+</style>
+<style>
+.markdown-alert {
+  padding: 0.5rem 1rem;
+  margin-bottom: 16px;
+  color: inherit;
+  border-left: .25em solid #888;
+}
+
+.markdown-alert>:first-child {
+  margin-top: 0
+}
+
+.markdown-alert>:last-child {
+  margin-bottom: 0
+}
+
+.markdown-alert .markdown-alert-title {
+  display: flex;
+  font-weight: 500;
+  align-items: center;
+  line-height: 1
+}
+
+.markdown-alert .markdown-alert-title .octicon {
+  margin-right: 0.5rem;
+  display: inline-block;
+  overflow: visible !important;
+  vertical-align: text-bottom;
+  fill: currentColor;
+}
+
+.markdown-alert.markdown-alert-note {
+  border-left-color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-note .markdown-alert-title {
+  color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-important {
+  border-left-color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-important .markdown-alert-title {
+  color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-warning {
+  border-left-color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-warning .markdown-alert-title {
+  color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-tip {
+  border-left-color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-tip .markdown-alert-title {
+  color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-caution {
+  border-left-color: var(--color-caution);
+}
+
+.markdown-alert.markdown-alert-caution .markdown-alert-title {
+  color: var(--color-caution);
+}
+
+</style>
+        
+        </head>
+        <body class="vscode-body vscode-light">
+            <span id="markdown-mermaid" aria-hidden="true" data-config="{&quot;darkModeTheme&quot;:&quot;vscode&quot;,&quot;lightModeTheme&quot;:&quot;vscode&quot;,&quot;maxTextSize&quot;:50000,&quot;clickDrag&quot;:&quot;alt&quot;,&quot;showControls&quot;:&quot;onHoverOrFocus&quot;,&quot;resizable&quot;:true,&quot;maxHeight&quot;:&quot;&quot;}"></span>
+				<h1 id="comment-créer-une-application-fullstack-avec-django-backend-et-react-frontend">Comment créer une application fullstack avec Django (backend) et React (frontend)</h1>
+<h2 id="table-des-matières">Table des matières</h2>
+<p>A. <a href="#1-backend-django5">Backend: Django5</a>
+1. <a href="#1-cr%C3%A9ation-dun-environnement-virtuel">Création d'un environnement virtuel</a>
+2. <a href="#2-installation-de-django5-et-de-rest-framework">Installation de Django5 et de Rest Framework</a>
+3. <a href="#3-cr%C3%A9ation-du-projet-backend-sous-r%C3%A9pertoire-backend">Création du projet backend (sous-répertoire backend)</a>
+4. <a href="#4-cr%C3%A9ation-de-lapplication-api">Création de l'application api</a>
+5. <a href="#5-backendbackendsettingspy-param%C3%A8trage-du-projet">backend/backend/settings.py (paramètrage du projet)</a>
+6. <a href="#6-backendbackendurlspy">backend/backend/urls.py</a>
+7. <a href="#7-cr%C3%A9ation-du-fichier-apimodelspy">Création du fichier api/models.py</a>
+8. <a href="#8-d%C3%A9marrer-lapplication">Démarrer l'application</a>
+9. <a href="#9-apiserializerspy-s%C3%A9rialisation-transformation-dun-objet-en-texte">api/serializers.py (sérialisation: transformation d'un objet en texte)</a>
+10. <a href="#10-backendurlspy">backend/urls.py</a>
+11. <a href="#11-apiviewspy">api/views.py</a>
+12. <a href="#12-apiurlspy">api/urls.py</a>
+FrontEnd: React</p>
+<hr>
+<h2 id="a-backend-django5">A. Backend: Django5</h2>
+<h3 id="1-création-dun-environnement-virtuel">1. Création d'un environnement virtuel</h3>
+<pre><code class="language-bash"><span class="hljs-built_in">mkdir</span> /mnt/C/Fullstack-expense/backend
+<span class="hljs-built_in">cd</span>  /mnt/C/Fullstack-expense/backend
+<span class="hljs-built_in">cd</span> ..
+<span class="hljs-built_in">source</span> <span class="hljs-built_in">env</span>/bin/activate
+</code></pre>
+<h4 id="table-des-matières-1"><a href="#table-des-mati%C3%A8res">Table des matières</a></h4>
+<hr>
+<h3 id="2-installation-de-django5-et-de-rest-framework">2. Installation de Django5 et de Rest Framework</h3>
+<pre><code class="language-bash">pip install django djangorestframework
+pip install django-cors-headers
+</code></pre>
+<h4 id="table-des-matières-2"><a href="#table-des-mati%C3%A8res">Table des matières</a></h4>
+<hr>
+<h3 id="3-création-du-projet-backend-sous-répertoire-backend">3. Création du projet backend (sous-répertoire backend)</h3>
+<pre><code class="language-bash">django-admin startproject backend .
+</code></pre>
+<blockquote>
+<p>/mnt/c/Fullastack-expense/backend/backend</p>
+</blockquote>
+<h4 id="table-des-matières-3"><a href="#table-des-mati%C3%A8res">Table des matières</a></h4>
+<hr>
+<h3 id="4-création-de-lapplication-api">4. Création de l'application api</h3>
+<pre><code class="language-bash">django-admin startapp api
+</code></pre>
+<h4 id="table-des-matières-4"><a href="#table-des-mati%C3%A8res">Table des matières</a></h4>
+<hr>
+<h3 id="5-backendbackendsettingspy-paramètrage-du-projet">5. backend/backend/settings.py (paramètrage du projet)</h3>
+<blockquote>
+<p>Suppression des commentaires en en-tête</p>
+</blockquote>
+<blockquote>
+<p>Modification de la partie INSTALLED_APPS (voir api/apps.py/class ApiConfig(AppConfig) et rest_framework)</p>
+</blockquote>
+<pre><code class="language-python">INSTALLED_APPS = [
+    <span class="hljs-string">&#x27;django.contrib.admin&#x27;</span>,
+    <span class="hljs-string">&#x27;django.contrib.auth&#x27;</span>,
+    <span class="hljs-string">&#x27;django.contrib.contenttypes&#x27;</span>,
+    <span class="hljs-string">&#x27;django.contrib.sessions&#x27;</span>,
+    <span class="hljs-string">&#x27;django.contrib.messages&#x27;</span>,
+    <span class="hljs-string">&#x27;django.contrib.staticfiles&#x27;</span>,
+    <span class="hljs-string">&#x27;api.apps.ApiConfig&#x27;</span>,
+    <span class="hljs-string">&#x27;rest_framework&#x27;</span>,
+]
+</code></pre>
+<blockquote>
+<p>Modification de la partie DATAASES</p>
+</blockquote>
+<pre><code class="language-python">
+DATABASES = {
+    <span class="hljs-string">&#x27;default&#x27;</span>: {
+        <span class="hljs-string">&#x27;ENGINE&#x27;</span>: <span class="hljs-string">&#x27;django.db.backends.postgresql&#x27;</span>,
+        <span class="hljs-string">&#x27;NAME&#x27;</span>: <span class="hljs-string">&#x27;transaction&#x27;</span>,
+        <span class="hljs-string">&#x27;USER&#x27;</span>: <span class="hljs-string">&#x27;postgres&#x27;</span>,
+        <span class="hljs-string">&#x27;PASSWORD&#x27;</span>: <span class="hljs-string">&#x27;admin&#x27;</span>,
+        <span class="hljs-string">&#x27;HOST&#x27;</span>: <span class="hljs-string">&#x27;localhost&#x27;</span>,
+        <span class="hljs-string">&#x27;PORT&#x27;</span>: <span class="hljs-string">&#x27;5437&#x27;</span>,
+    }
+}
+</code></pre>
+<h4 id="table-des-matières-5"><a href="#table-des-mati%C3%A8res">Table des matières</a></h4>
+<hr>
+<h3 id="6-backendbackendurlspy">6. backend/backend/urls.py</h3>
+<blockquote>
+<p>Suppression des commentaires en en-tête</p>
+</blockquote>
+<h4 id="table-des-matières-6"><a href="#table-des-mati%C3%A8res">Table des matières</a></h4>
+<hr>
+<h3 id="7-création-du-fichier-apimodelspy">7. Création du fichier api/models.py</h3>
+<pre><code class="language-python"><span class="hljs-keyword">from</span> django.db <span class="hljs-keyword">import</span> models
+<span class="hljs-keyword">import</span> uuid
+
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">Transaction</span>(models.Model):
+    <span class="hljs-built_in">id</span> = models.UUIDField(primary_key=<span class="hljs-literal">True</span>, default=uuid.uuid4, editable=<span class="hljs-literal">False</span>)
+    text = models.CharField(max_length=<span class="hljs-number">255</span>)
+    amount = models.DecimalField(max_digits=<span class="hljs-number">10</span> , decimal_places=<span class="hljs-number">2</span>)
+    created_at = models.DateTimeField(auto_now_add=<span class="hljs-literal">True</span>)
+    
+    <span class="hljs-keyword">class</span> <span class="hljs-title class_">Meta</span>:
+        ordering = [<span class="hljs-string">&#x27;-created_at&#x27;</span>]
+    
+    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__str__</span>(<span class="hljs-params">self</span>):
+        <span class="hljs-keyword">return</span> <span class="hljs-string">f&quot;<span class="hljs-subst">{self.text}</span> (<span class="hljs-subst">{self.amount}</span>)&quot;</span>    
+</code></pre>
+<p>-#### <a href="#table-des-mati%C3%A8res">Table des matières</a></p>
+<hr>
+<pre><code class="language-bash">python3 -m pip install djangorestframework
+python3 -m pip install <span class="hljs-string">&quot;psycopg[binary]&quot;</span>
+
+/mnt/c/sources/fullstack-expense/backend$ python3 manage.py makemigrations
+Migrations <span class="hljs-keyword">for</span> <span class="hljs-string">&#x27;api&#x27;</span>:
+  api/migrations/0001_initial.p
+
+python3 manage.py showmigrations
+admin
+ [ ] 0001_initial
+ [ ] 0002_logentry_remove_auto_add
+ [ ] 0003_logentry_add_action_flag_choices
+api
+ [ ] 0001_initial
+auth
+ [ ] 0001_initial
+ [ ] 0002_alter_permission_name_max_length
+ [ ] 0003_alter_user_email_max_length
+ [ ] 0004_alter_user_username_opts
+ [ ] 0005_alter_user_last_login_null
+ [ ] 0006_require_contenttypes_0002
+ [ ] 0007_alter_validators_add_error_messages
+ [ ] 0008_alter_user_username_max_length
+ [ ] 0009_alter_user_last_name_max_length
+ [ ] 0010_alter_group_name_max_length
+ [ ] 0011_update_proxy_permissions
+ [ ] 0012_alter_user_first_name_max_length
+contenttypes
+ [ ] 0001_initial
+ [ ] 0002_remove_content_type_name
+sessions
+ [ ] 0001_initial
+</code></pre>
+<h4 id="table-des-matières-7"><a href="#table-des-mati%C3%A8res">Table des matières</a></h4>
+<hr>
+<blockquote>
+<p>Aplliquer les migrations sur la base de données migration</p>
+</blockquote>
+<pre><code class="language-bash">ython3 manage.py migrate
+Operations to perform:
+  Apply all migrations: admin, api, auth, contenttypes, sessions
+Running migrations:
+  Applying contenttypes.0001_initial... OK
+  Applying auth.0001_initial... OK
+  Applying admin.0001_initial... OK
+  Applying admin.0002_logentry_remove_auto_add... OK
+  Applying admin.0003_logentry_add_action_flag_choices... OK
+  Applying api.0001_initial... OK
+  Applying contenttypes.0002_remove_content_type_name... OK
+  Applying auth.0002_alter_permission_name_max_length... OK
+  Applying auth.0003_alter_user_email_max_length... OK
+  Applying auth.0004_alter_user_username_opts... OK
+  Applying auth.0005_alter_user_last_login_null... OK
+  Applying auth.0006_require_contenttypes_0002... OK
+  Applying auth.0007_alter_validators_add_error_messages... OK
+  Applying auth.0008_alter_user_username_max_length... OK
+  Applying auth.0009_alter_user_last_name_max_length... OK
+  Applying auth.0010_alter_group_name_max_length... OK
+  Applying auth.0011_update_proxy_permissions... OK
+  Applying auth.0012_alter_user_first_name_max_length... OK
+  Applying sessions.0001_initial... OK
+</code></pre>
+<h4 id="table-des-matières-8"><a href="#table-des-mati%C3%A8res">Table des matières</a></h4>
+<hr>
+<h3 id="8-démarrer-lapplication">8. Démarrer l'application</h3>
+<pre><code class="language-bash">/mnt/c/sources/fullstack-expense/backend$ python3 manage.py runserver
+
+http://127.0.0.1:8000/ --&gt; The install worked successfully! Congratulations!
+</code></pre>
+<h4 id="table-des-matières-9"><a href="#table-des-mati%C3%A8res">Table des matières</a></h4>
+<hr>
+<h3 id="9-apiserializerspy-sérialisation-transformation-dun-objet-en-texte">9. api/serializers.py (sérialisation: transformation d'un objet en texte)</h3>
+<pre><code class="language-python"><span class="hljs-comment"># Importe le module des serializers de Django REST Framework (DRF)</span>
+<span class="hljs-keyword">from</span> rest_framework <span class="hljs-keyword">import</span> serializers
+<span class="hljs-comment"># Importe le modèle Transaction défini dans api/models.py</span>
+<span class="hljs-keyword">from</span> .models <span class="hljs-keyword">import</span> Transaction
+
+
+<span class="hljs-comment"># Un serializer convertit un objet Django (modèle) en JSON pour l&#x27;API,</span>
+<span class="hljs-comment"># et inversement : il valide et transforme le JSON reçu en objet Python.</span>
+<span class="hljs-comment"># ModelSerializer génère automatiquement les champs à partir du modèle.</span>
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">TransactionSerializer</span>(serializers.ModelSerializer):
+    <span class="hljs-keyword">class</span> <span class="hljs-title class_">Meta</span>:
+        <span class="hljs-comment"># Le modèle sur lequel le serializer se base</span>
+        model = Transaction
+
+        <span class="hljs-comment"># Liste des champs exposés dans l&#x27;API (en lecture et en écriture)</span>
+        fields = [<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;text&quot;</span>, <span class="hljs-string">&quot;amount&quot;</span>, <span class="hljs-string">&quot;created_at&quot;</span>]
+
+        <span class="hljs-comment"># Champs en lecture seule : renvoyés dans les réponses JSON,</span>
+        <span class="hljs-comment"># mais ignorés si le client les envoie dans une requête POST/PUT.</span>
+        <span class="hljs-comment"># &quot;id&quot; est généré par la base, &quot;created_at&quot; est rempli automatiquement.</span>
+        read_only_fields = [<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;created_at&quot;</span>]
+</code></pre>
+<h4 id="table-des-matières-10"><a href="#table-des-mati%C3%A8res">Table des matières</a></h4>
+<hr>
+<h3 id="10-backendurlspy">10. backend/urls.py</h3>
+<pre><code class="language-python"><span class="hljs-comment"># Module d&#x27;administration de Django (interface /admin/)</span>
+<span class="hljs-keyword">from</span> django.contrib <span class="hljs-keyword">import</span> admin
+<span class="hljs-comment"># path : déclare une route ; include : délègue à un autre fichier d&#x27;URLs</span>
+<span class="hljs-keyword">from</span> django.urls <span class="hljs-keyword">import</span> path, include
+
+<span class="hljs-comment"># Liste des routes de niveau projet.</span>
+<span class="hljs-comment"># Django la parcourt de haut en bas et utilise la première qui correspond.</span>
+urlpatterns = [
+    <span class="hljs-comment"># Toute URL commençant par &quot;api/&quot; est transmise au fichier api/urls.py.</span>
+    <span class="hljs-comment"># Exemple : &quot;api/transactions/&quot; -&gt; Django cherche &quot;transactions/&quot;</span>
+    <span class="hljs-comment"># dans api/urls.py.</span>
+    path(<span class="hljs-string">&quot;api/&quot;</span>, include(<span class="hljs-string">&#x27;api.urls&#x27;</span>)),
+]
+</code></pre>
+<h4 id="table-des-matières-11"><a href="#table-des-mati%C3%A8res">Table des matières</a></h4>
+<hr>
+<h3 id="11-apiviewspy">11. api/views.py</h3>
+<pre><code class="language-python"><span class="hljs-comment"># render sert à renvoyer des pages HTML : inutile ici, une API renvoie du JSON</span>
+<span class="hljs-keyword">from</span> django.shortcuts <span class="hljs-keyword">import</span> render
+<span class="hljs-comment"># Vues génériques de DRF : elles contiennent déjà toute la logique CRUD</span>
+<span class="hljs-keyword">from</span> rest_framework <span class="hljs-keyword">import</span> generics
+<span class="hljs-keyword">from</span> .models <span class="hljs-keyword">import</span> Transaction
+<span class="hljs-keyword">from</span> .serializers <span class="hljs-keyword">import</span> TransactionSerializer
+
+
+<span class="hljs-comment"># Vue pour la collection de transactions :</span>
+<span class="hljs-comment">#   GET  -&gt; renvoie la liste de toutes les transactions</span>
+<span class="hljs-comment">#   POST -&gt; crée une nouvelle transaction</span>
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">TransactionListCreateView</span>(generics.ListCreateAPIView):
+    <span class="hljs-comment"># Ensemble d&#x27;objets sur lequel la vue travaille</span>
+    queryset = Transaction.objects.<span class="hljs-built_in">all</span>()
+    <span class="hljs-comment"># Serializer utilisé pour valider les données reçues</span>
+    <span class="hljs-comment"># et convertir les objets en JSON</span>
+    serializer_class = TransactionSerializer
+
+
+<span class="hljs-comment"># Vue pour UNE transaction précise :</span>
+<span class="hljs-comment">#   GET          -&gt; détail</span>
+<span class="hljs-comment">#   PUT / PATCH  -&gt; modification (complète / partielle)</span>
+<span class="hljs-comment">#   DELETE       -&gt; suppression</span>
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">TransactionRetrieveUpdateDestroyView</span>(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Transaction.objects.<span class="hljs-built_in">all</span>()
+    serializer_class = TransactionSerializer
+    <span class="hljs-comment"># Champ utilisé pour retrouver l&#x27;objet dans l&#x27;URL.</span>
+    <span class="hljs-comment"># Par défaut DRF utilise &quot;pk&quot; ; ici on demande &quot;id&quot;,</span>
+    <span class="hljs-comment"># donc l&#x27;URL devra contenir &lt;int:id&gt; et non &lt;int:pk&gt;.</span>
+    lookup_field = <span class="hljs-string">&quot;id&quot;</span>
+</code></pre>
+<h4 id="table-des-matières-12"><a href="#table-des-mati%C3%A8res">Table des matières</a></h4>
+<hr>
+<h3 id="12-apitestrest">12. api/test.rest</h3>
+<blockquote>
+<p>Outil pour tester: REST Client. VSC &gt; Ajouter Extension &gt; REST Client</p>
+</blockquote>
+<h4 id="postcreate-getread-putupdate-mettre-à-jour-complètement-une-transaction-patchmodification-dun-seul-champs">POST:Create, GET:Read, PUT:Update (Mettre à jour complètement une transaction), PATCH:Modification d'un seul champs</h4>
+<pre><code class="language-rest">### ============================================================
+### Tests de l'API des transactions (extension REST Client)
+### Serveur : python3 manage.py runserver
+### ============================================================
+
+### 1. CRÉER une transaction
+# POST sur la collection : le serveur génère l'id (UUID) et created_at.
+# Copiez l'id renvoyé dans la réponse pour tester les requêtes suivantes.
+POST http://localhost:8000/api/transactions/
+Content-Type: application/json
+
+{
+  &quot;text&quot;: &quot;Salaire Juin&quot;,
+  &quot;amount&quot;: -2000.00
+}
+
+### 2. LISTER toutes les transactions
+# GET sur la collection : renvoie un tableau JSON.
+GET http://localhost:8000/api/transactions/
+
+### 3. SUPPRIMER une transaction
+# DELETE sur une transaction précise (UUID dans l'URL).
+# Réponse attendue : 204 No Content. Un second appel donnera 404.
+DELETE http://localhost:8000/api/transactions/7fe3245a-4b8d-4633-89cb-cea8715416c4/
+
+### 4. MODIFIER une transaction (remplacement COMPLET)
+# PUT exige tous les champs modifiables (text et amount),
+# sinon DRF répond 400.
+PUT http://localhost:8000/api/transactions/46e9110c-3590-473d-8492-2ffa6650ce36/
+Content-Type: application/json
+
+{
+  &quot;text&quot;: &quot;Salaire février&quot;,
+  &quot;amount&quot;: 10000.00
+}
+
+### 5. MODIFIER une transaction (mise à jour PARTIELLE)
+# PATCH n'envoie que les champs à changer (ici uniquement amount).
+PATCH http://localhost:8000/api/transactions/46e9110c-3590-473d-8492-2ffa6650ce36/
+Content-Type: application/json
+
+{
+  &quot;amount&quot;: 60000.00
+}
+</code></pre>
+<p>Cliquer sur Send Request pour voir les réultats.</p>
+<hr>
+<p><strong>Fichier api/urls.py de test</strong></p>
+<pre><code class="language-python"><span class="hljs-keyword">from</span> django.contrib <span class="hljs-keyword">import</span> admin
+<span class="hljs-keyword">from</span> django.urls <span class="hljs-keyword">import</span> path
+<span class="hljs-keyword">from</span> . <span class="hljs-keyword">import</span> views
+
+urlpatterns = [
+    path(<span class="hljs-string">&#x27;transactions/&#x27;</span>, views.TransactionListCreateView.as_view())
+]
+</code></pre>
+<p>python3 <a href="http://manage.py">manage.py</a> runserver</p>
+<h4 id="table-des-matières-13"><a href="#table-des-mati%C3%A8res">Table des matières</a></h4>
+<hr>
+<h3 id="12-apiurlspy">12. api/urls.py</h3>
+<pre><code class="language-python"><span class="hljs-comment"># Inutile ici : l&#x27;admin se déclare dans le urls.py principal du projet</span>
+<span class="hljs-keyword">from</span> django.contrib <span class="hljs-keyword">import</span> admin
+<span class="hljs-comment"># path : déclare une route</span>
+<span class="hljs-keyword">from</span> django.urls <span class="hljs-keyword">import</span> path
+<span class="hljs-comment"># Importe les vues définies dans api/views.py</span>
+<span class="hljs-keyword">from</span> . <span class="hljs-keyword">import</span> views
+
+<span class="hljs-comment"># Routes de l&#x27;application &quot;api&quot;.</span>
+<span class="hljs-comment"># Le préfixe &quot;api/&quot; est ajouté par le urls.py principal via include().</span>
+urlpatterns = [
+    <span class="hljs-comment"># /api/transactions/</span>
+    <span class="hljs-comment">#   GET  -&gt; liste des transactions</span>
+    <span class="hljs-comment">#   POST -&gt; création d&#x27;une transaction</span>
+    <span class="hljs-comment"># as_view() convertit la classe de vue en fonction utilisable par Django</span>
+    path(<span class="hljs-string">&#x27;transactions/&#x27;</span>, views.TransactionListCreateView.as_view()),
+
+    <span class="hljs-comment"># /api/transactions/&lt;uuid&gt;/ , par exemple :</span>
+    <span class="hljs-comment"># /api/transactions/3fa85f64-5717-4562-b3fc-2c963f66afa6/</span>
+    <span class="hljs-comment">#   GET          -&gt; détail</span>
+    <span class="hljs-comment">#   PUT / PATCH  -&gt; modification</span>
+    <span class="hljs-comment">#   DELETE       -&gt; suppression</span>
+    <span class="hljs-comment"># &lt;uuid:id&gt; capture un UUID et le passe à la vue sous le nom &quot;id&quot;,</span>
+    <span class="hljs-comment"># qui correspond au lookup_field = &quot;id&quot; de la vue.</span>
+    path(<span class="hljs-string">&#x27;transactions/&lt;uuid:id&gt;/&#x27;</span>, views.TransactionRetrieveUpdateDestroyView.as_view()),
+]
+</code></pre>
+<h4 id="table-des-matières-14"><a href="#table-des-mati%C3%A8res">Table des matières</a></h4>
+<hr>
+<h2 id="b-frontend-react">B. FrontEnd: React</h2>
+<h3 id="1">1.</h3>
+<h2 id="c-informations">C. Informations</h2>
+<p><a href="https://www.geeksforgeeks.org/python/django-tutorial/">Tutoriel Django</a></p>
+<h4 id="table-des-matières-15"><a href="#table-des-mati%C3%A8res">Table des matières</a></h4>
+<hr>
+
+            <script async src="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.js"></script>
+            
+        </body>
+        </html>
