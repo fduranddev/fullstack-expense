@@ -3,22 +3,23 @@
 ## Table des matières
 
 A. [Backend: Django5](#1-backend-django5)  
-    1. [Création d'un environnement virtuel](#1-création-dun-environnement-virtuel)  
-    2. [Installation de Django5 et de Rest Framework](#2-installation-de-django5-et-de-rest-framework)  
-    3. [Création du projet backend (sous-répertoire backend)](#3-création-du-projet-backend-sous-répertoire-backend)    
-    4. [Création de l'application api](#4-création-de-lapplication-api)  
-    5. [backend/backend/settings.py (paramètrage du projet)](#5-backendbackendsettingspy-paramètrage-du-projet)  
-    6. [backend/backend/urls.py](#6-backendbackendurlspy)  
-    7. [Création du fichier api/models.py](#7-création-du-fichier-apimodelspy)  
-    8. [Démarrer l'application](#8-démarrer-lapplication)  
-    9. [api/serializers.py](#9-apiserializerspy)  
-    10. [backend/urls.py](#10-backendurlspy)  
-    11. [api/views.py](#11-apiviewspy)  
-    12. [api/urls.py](#12-apiurlspy)  
-   <br>
-B. [FrontEnd: React](#b-frontend-react)  
-    1.[]  
-    <br>
+  1. [Création d'un environnement virtuel](#1-création-dun-environnement-virtuel)  
+  2. [Installation de Django5 et de Rest Framework](#2-installation-de-django5-et-de-rest-framework)  
+  3. [Création du projet backend (sous-répertoire backend)](#3-création-du-projet-backend-sous-répertoire-backend)    
+  4. [Création de l'application api](#4-création-de-lapplication-api)  
+  5. [backend/backend/settings.py (paramètrage du projet)](#5-backendbackendsettingspy-paramètrage-du-projet)  
+  6. [backend/backend/urls.py](#6-backendbackendurlspy)  
+  7. [Création du fichier api/models.py](#7-création-du-fichier-apimodelspy)  
+  8. [Démarrer l'application](#8-démarrer-lapplication)  
+  9. [api/serializers.py](#9-apiserializerspy)  
+  10. [backend/urls.py](#10-backendurlspy)  
+  11. [api/views.py](#11-apiviewspy)  
+  12. [api/urls.py](#12-apiurlspy)  
+  <br>
+
+B. [FrontEnd: React](#b-frontend-react)
+  <br>
+
 C. [Informations](#c-informations)  
 
 ---
@@ -568,6 +569,12 @@ export default function Home() {
 ---
 
 [Formation en cours](https://www.youtube.com/watch?v=gj8pTA3hNfM&t=3127s)
+
+## B.FrontEnd: React
+
+#### [Table des matières](#table-des-matières)
+
+---
 
 ## C. Informations
 
