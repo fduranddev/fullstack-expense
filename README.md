@@ -28,9 +28,9 @@ C. [Informations](#c-informations)
 ### 1. Création d'un environnement virtuel
 
 ```bash
-mkdir /mnt/C/Fullstack-expense/backend
-cd  /mnt/C/Fullstack-expense/backend
-cd ..
+$ mkdir /mnt/C/Fullstack-expense/backend
+$ cd  /mnt/C/Fullstack-expense/backend
+$ cd ..
 source env/bin/activate
 ```
 
@@ -41,8 +41,8 @@ source env/bin/activate
 ### 2. Installation de Django5 et de Rest Framework
 
 ```bash
-pip install django djangorestframework
-pip install django-cors-headers
+$ pip install django djangorestframework
+$ pip install django-cors-headers
 ```
 
 #### [Table des matières](#table-des-matières)
@@ -52,7 +52,7 @@ pip install django-cors-headers
 ### 3. Création du projet backend (sous-répertoire backend)
 
 ```bash
-django-admin startproject backend .
+$ django-admin startproject backend .
 ```
 
 > /mnt/c/Fullastack-expense/backend/backend
@@ -64,7 +64,7 @@ django-admin startproject backend .
 ### 4. Création de l'application api
 
 ```bash
-django-admin startapp api
+$ django-admin startapp api
 ```
 
 #### [Table des matières](#table-des-matières)
@@ -142,8 +142,8 @@ class Transaction(models.Model):
 ---
 
 ```bash
-python3 -m pip install djangorestframework
-python3 -m pip install "psycopg[binary]"
+$ python3 -m pip install djangorestframework
+$ python3 -m pip install "psycopg[binary]"
 
 /mnt/c/sources/fullstack-expense/backend$ python3 manage.py makemigrations
 Migrations for 'api':
@@ -387,7 +387,9 @@ urlpatterns = [
 ]
 ```
 
-python3 manage.py runserver
+```bash
+$ python3 manage.py runserver
+```
 
 #### [Table des matières](#table-des-matières)
 
@@ -432,7 +434,7 @@ urlpatterns = [
 ### 1. Installation de React
 
 ```bash
-npx create-next-app@latest ./
+$ npx create-next-app@latest ./
 
 Using npm.
 
@@ -520,7 +522,7 @@ export default function Home() {
 [Installez daisyUI en tant que plugin Tailwin](https://daisyui.com/docs/install/)
 
 ```bash
-npm i -D daisyui@latest
+$ npm i -D daisyui@latest
 ```
 
 #### [Table des matières](#table-des-matières)
