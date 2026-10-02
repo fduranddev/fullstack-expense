@@ -223,7 +223,7 @@ http://127.0.0.1:8000/ --> The install worked successfully! Congratulations!
 
 ---
 
-### 9. api/serializers.py 
+### 9. api/serializers.py
 
 >sérialisation: transformation d'un objet en texte
 
@@ -574,9 +574,3 @@ export default function Home() {
 [Tutoriel Django](https://www.geeksforgeeks.org/python/django-tutorial/)
 
 #### [Table des matières](#table-des-matières)
-
----
-
-#### [Table des matières](#table-des-matières)
-
----
