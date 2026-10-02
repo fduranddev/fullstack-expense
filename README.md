@@ -137,7 +137,7 @@ class Transaction(models.Model):
         return f"{self.text} ({self.amount})"    
 ```
 
--#### [Table des matières](#table-des-matières)
+#### [Table des matières](#table-des-matières)
 
 ---
 
